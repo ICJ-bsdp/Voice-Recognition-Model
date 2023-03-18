@@ -1,9 +1,10 @@
 import os
 import azure.cognitiveservices.speech as speechsdk
+import time
 
 def recognize_from_microphone():
     speech_config = speechsdk.SpeechConfig(subscription=('ca5c981b5b02433883bcb941aecb7e03'), region=('eastus'))
-    speech_config.speech_recognition_language="en-US"
+    speech_config.speech_recognition_language="zh-CN" #en-US  zh-CN es-ES
     speech_config.set_profanity(speechsdk.ProfanityOption.Raw)
 
     audio_config = speechsdk.audio.AudioConfig(use_default_microphone=True)
@@ -11,6 +12,11 @@ def recognize_from_microphone():
     
     print("Speak into your microphone.")
     
+    # for i in range(10):
+    #     time.sleep(0.5)
+    #     speech_recognition_result = speech_recognizer.().get()
+    #     print("Recognized: {}".format(speech_recognition_result.text))
+
     speech_recognition_result = speech_recognizer.recognize_once_async().get()
 
     if speech_recognition_result.reason == speechsdk.ResultReason.RecognizedSpeech:
